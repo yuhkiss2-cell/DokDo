@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper to validate string size
+    function isValidString(val, minLen, maxLen) {
+      return val is string && val.size() >= minLen && val.size() <= maxLen;
+    }
+
+    // Helper to validate ID length and characters
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128;
+    }
+
+    // Validation for leaderboard entries
+    function isValidLeaderboardEntry(data) {
+      return data.keys().hasAll(['school', 'name', 'score', 'fishCollected', 'difficulty', 'createdAt'])
+        && data.keys().size() == 6
+        && isValidString(data.school, 1, 50)
+        && isValidString(data.name, 1, 30)
+        && data.score is number
+        && data.score >= 0
+        && data.score <= 1000000
+        && data.fishCollected is number
+        && data.fishCollected >= 0
+        && data.fishCollected <= 100000
+        && data.difficulty in ['easy', 'normal', 'hard']
+        && (data.createdAt is string || data.createdAt is timestamp);
+    }
+
+    // Leaderboard entries collection
+    match /leaderboard/{entryId} {
+      allow read, list: if true;
+      allow create: if isValidId(entryId) && isValidLeaderboardEntry(request.resource.data);
+      allow update, delete: if false;
+    }
+  }
+}

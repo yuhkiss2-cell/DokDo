@@ -1,0 +1,52 @@
+{
+  "entities": {
+    "LeaderboardEntry": {
+      "title": "Leaderboard Entry",
+      "description": "Represents a single entry in the leaderboard with school, name, and score details.",
+      "type": "object",
+      "properties": {
+        "school": {
+          "type": "string",
+          "description": "The school name of the player"
+        },
+        "name": {
+          "type": "string",
+          "description": "The player name"
+        },
+        "score": {
+          "type": "number",
+          "description": "The final score achieved"
+        },
+        "fishCollected": {
+          "type": "number",
+          "description": "The number of fishes collected during the run"
+        },
+        "difficulty": {
+          "type": "string",
+          "description": "The game difficulty level"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the entry was created"
+        }
+      },
+      "required": [
+        "school",
+        "name",
+        "score",
+        "fishCollected",
+        "difficulty",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "leaderboard": {
+      "schema": {
+        "$ref": "#/entities/LeaderboardEntry"
+      },
+      "description": "Collection storing public leaderboard score submissions."
+    }
+  }
+}

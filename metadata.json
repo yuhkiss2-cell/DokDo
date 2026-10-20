@@ -1,0 +1,6 @@
+{
+  "name": "독도 괭이갈매기",
+  "description": "괭이갈매기가 되어 독도의 아름다운 바다를 배경으로 바위를 피해 날아가는 플래피 버드 스타일의 캐주얼 게임입니다. 다양한 스킨, 미션, 사운드 효과 및 고득점 기록을 즐겨보세요!",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
